@@ -1,0 +1,163 @@
+=================================================================
+FREQUENCY IRIS FRAMEWORK — EXTENDED VALIDATION
+New metrics: Eigenmode Dominance, HCI, Spectral Entropy,
+             Phase Synchronization Index, Symmetry Operator
+=================================================================
+
+Found 1000 subjects
+Sampling 150 subjects for right-eye analysis
+
+Processing...
+  30/150 tried, 24 valid
+  60/150 tried, 43 valid
+  90/150 tried, 62 valid
+  120/150 tried, 83 valid
+  150/150 tried, 106 valid
+
+Valid measurements: 106
+
+══ 1. EIGENMODE DOMINANCE RATIO (E_d) ══════════════════════════
+E_d = power of dominant mode / total spectral power
+High E_d = iris organised around one strong frequency
+Low  E_d = multiple competing frequencies
+
+  N         : 106
+  Mean E_d  : 0.6321
+  Std       : 0.1905
+  Min       : 0.2095
+  Max       : 0.9524
+  Median    : 0.6664
+
+  High dominance (>0.50): 75 irises (70.8%)
+  Mid  dominance  (0.20–0.50): 31 irises (29.2%)
+  Low  dominance (<0.20): 0 irises (0.0%)
+
+  Interpretation: single-mode dominated
+
+══ 2. HARMONIC COHERENCE INDEX (HCI) ═══════════════════════════
+HCI = power at integer harmonics of fundamental / total power
+HCI near 1 = highly ordered harmonic architecture
+HCI near 0 = noisy, non-harmonic structure
+
+  N        : 106
+  Mean HCI : 0.8603
+  Std      : 0.1426
+  Min      : 0.3477
+  Max      : 1.0024
+  Median   : 0.9172
+
+  Mean harmonics detected per iris: 7.0
+  Interpretation: structured harmonic architecture
+
+══ 3. SPECTRAL ENTROPY (H) ══════════════════════════════════════
+H = Shannon entropy of normalised power spectrum
+Low  H = organised, few dominant frequencies
+High H = complex, many competing frequencies
+
+  N              : 106
+  Mean H (bits)  : 1.6404
+  Std            : 0.6374
+  Normalised H   : 0.3412  (0=fully ordered, 1=maximum entropy)
+  Std norm H     : 0.1326
+
+  25th percentile: 0.2294
+  75th percentile: 0.4431
+  IQR            : 0.2137
+
+  Correlation (dominant freq vs normalised entropy): r = 0.229
+  Interpretation: frequency and complexity are largely independent
+
+══ 4. PHASE SYNCHRONIZATION INDEX (PSI) ═════════════════════════
+PSI = circular mean resultant of phase angles across significant bins
+PSI = 1 → perfect phase alignment across frequencies
+PSI = 0 → complete phase randomness
+
+  N        : 106
+  Mean PSI : 0.3603
+  Std      : 0.2714
+  Min      : 0.0000
+  Max      : 0.9954
+  Median   : 0.3167
+
+  High coherence (PSI>0.70): 16 irises (15.1%)
+  Low  coherence (PSI<0.30): 49  irises (46.2%)
+
+  Correlation (PSI vs normalised entropy): r = -0.048
+  Expected: negative (more coherent = lower entropy)
+
+══ 5. UPGRADED SYMMETRY OPERATOR (S) ═══════════════════════════
+S = 1 - |L-R| / (L+R)   [bounded 0–1, higher=more symmetric]
+Replaces: d = |L-R| / max(L,R)
+Testing on subjects with both eyes available.
+
+  Subjects tested: 34
+
+  NEW Symmetry Operator (S):
+    Mean S : 0.9123  (1=identical, 0=completely different)
+    Std    : 0.0962
+    Highly symmetric (S>0.90): 22
+    Highly asymmetric (S<0.70): 2
+
+  OLD differential (d) — for comparison:
+    Mean d : 0.1482  (previous metric)
+    Std    : 0.1482
+
+  Most symmetric pairs (S closest to 1):
+    698: L=5.4  R=5.4  S=0.998
+    048: L=5.4  R=5.5  S=0.997
+    906: L=5.6  R=5.5  S=0.991
+    780: L=6.9  R=7.0  S=0.990
+
+  Most asymmetric pairs (S closest to 0):
+    642: L=8.8  R=5.7  S=0.789
+    919: L=8.9  R=5.6  S=0.776
+    787: L=10.9  R=5.5  S=0.666
+    273: L=7.4  R=16.2  S=0.627
+
+  Correlation (symmetry vs L/R PSI difference): r = -0.097
+  Symmetry and PSI difference appear independent
+
+══ 6. T-TEST: COLLARETTE RATIO VS φ PREDICTION ═════════════════
+One-sample t-test. H₀: mean ratio = φ⁻¹ = 0.382
+(Previously computed from N=139; confirmed here)
+
+  N      : 106
+  Mean   : 0.3619
+  Std    : 0.0830
+  SE     : 0.00810
+  μ₀     : 0.382 (φ prediction)
+  t      : -2.4760
+  p      : 0.0149
+  95% CI : [0.3459, 0.3780]
+  φ pred outside 95% CI
+
+  Interpretation:
+  The proxy measure (pupil:iris radius ratio) mean is 0.362.
+  The φ prediction of 0.382 is 2.5 SE from the mean.
+  The difference is statistically significant (p=0.0149).
+  However, this measures pupil:iris as a proxy — not the true collarette.
+  True collarette segmentation is required for a definitive φ test.
+
+══ 7. COMPOSITE METRIC PREVIEW (MCI) ═══════════════════════════
+MCI = (HCI × PSI) / normalised_entropy
+Preview only — validate components individually first.
+
+  Mean MCI : 1.1094
+  Std      : 1.2265
+  Range    : 0.0000 – 5.0750
+  Note: Components must be individually validated before MCI is reported.
+
+=================================================================
+SUMMARY — ALL NEW METRICS
+=================================================================
+Metric                             Mean      Std              Range
+-----------------------------------------------------------------
+Eigenmode Dominance (E_d)        0.6321   0.1905 0.210–0.952
+Harmonic Coherence (HCI)         0.8603   0.1426 0.348–1.002
+Spectral Entropy (norm)          0.3412   0.1326 0.080–0.629
+Phase Sync Index (PSI)           0.3603   0.2714 0.000–0.995
+Symmetry Operator (S)            0.9123   0.0962 0.627–0.998
+Collarette t-test p-value        0.0149
+=================================================================
+
+Paste full output into Claude chat for analysis.

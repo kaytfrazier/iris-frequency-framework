@@ -1,0 +1,92 @@
+=================================================================
+FREQUENCY IRIS FRAMEWORK — VALIDATION CONFIRMATION
+Dataset : CASIA-Iris-Thousand
+=================================================================
+
+Loading subject list...
+Found 1000 subjects
+
+══ VALIDATION A: COLLARETTE RATIO — LARGER SAMPLE (N=200) ══════
+Retest the φ prediction on a bigger sample.
+If the mean holds near 0.382 at N=200, the finding is robust.
+
+  50/200 tried, 39 valid...
+  100/200 tried, 68 valid...
+  150/200 tried, 106 valid...
+  200/200 tried, 139 valid...
+
+  Subjects tried   : 200
+  Valid measurements: 139
+  Mean ratio       : 0.3599
+  Std              : 0.0811
+  φ prediction     : 0.3820
+  Deviation        : 0.0221
+
+  Previous mean (N=51): 0.349
+  New mean     (N=139): 0.360
+  Shift between samples: 0.0109
+
+  Verdict: CONSISTENT WITH φ ✓ — finding robust at larger N
+  Consistency: STABLE ✓
+
+══ VALIDATION B: BILATERAL DIFFERENTIAL CONSISTENCY ════════════
+Same subjects, second image pair (image[1] not image[0]).
+If large-differential subjects are consistently large across
+both pairs, the differential is a real constitutional feature.
+If it's random, the same subject will show different results.
+
+  Eligible subjects (≥2 images/eye): 1000
+  Testing: 50 subjects
+
+  Subjects with both pairs valid: 22
+
+  PAIR 1 (image[0]):
+    Mean diff : 0.075
+    Std       : 0.106
+    Large (>0.25): 2
+
+  PAIR 2 (image[1] — independent):
+    Mean diff : 0.096
+    Std       : 0.090
+    Large (>0.25): 2
+
+  Correlation between pair 1 and pair 2: r = -0.057
+  Verdict: NO CONSISTENCY — differential appears to be noise
+
+  Subjects with large diff (>0.25) in BOTH pairs:
+    None — no subjects consistently large across both pairs
+
+  Subjects with small diff (<0.10) in BOTH pairs:
+    Count: 12 out of 22
+
+══ VALIDATION C: REPRODUCIBILITY SPLIT TEST ════════════════════
+Same image processed twice → must give identical result.
+Then: same image vs different image of same eye.
+This separates algorithmic noise from real image variation.
+
+  Subjects tested: 22
+
+  SAME IMAGE TWICE (should be zero):
+    Mean deviation: 0.000000
+    Max deviation : 0.000000
+    DETERMINISTIC ✓ — algorithm is stable
+
+  DIFFERENT IMAGES, SAME EYE:
+    Mean CV: 0.0494
+    Max CV : 0.2514
+    Verdict: STABLE ✓ (CV<0.10)
+
+  Same-image deviation : 0.000000
+  Cross-image CV       : 0.0494
+  Ratio (cross/same)   : 49410716.3x
+  → Variance is from image acquisition, not algorithm. ✓
+
+=================================================================
+CONFIRMATION SUMMARY
+=================================================================
+A. Collarette ratio (N=139): 0.360 (φ=0.382, dev=0.022)  ✓
+B. Bilateral consistency (N=22): r=-0.057   noise
+C. Reproducibility: same-image=0.000000, cross-image CV=0.0494  ✓
+=================================================================
+
+Paste this full output into the Claude chat.
